@@ -1,6 +1,10 @@
-fastapi
-uvicorn
-transformers
-torch
-datasets
-numpy
+fastapi==0.95.1
+uvicorn==0.22.0
+transformers==4.46.2
+torch==2.0.1
+numpy==1.23.5
+pandas==1.5.3
+scikit-learn==1.2.2
+datasets==2.12.0
+pyngrok==5.2.2
+typing-extensions==4.5.0
