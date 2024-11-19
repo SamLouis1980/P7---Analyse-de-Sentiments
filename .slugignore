@@ -1,0 +1,6 @@
+*.whl
+*.tar.gz
+*.zip
+__pycache__/
+*.pt
+*.bin
