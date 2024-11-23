@@ -1,6 +1,21 @@
+# Ignorer les archives
 *.whl
 *.tar.gz
 *.zip
+
+# Ignorer les fichiers temporaires Python
+*.pyc
+*.pyo
 __pycache__/
+
+# Ignorer les modèles PyTorch et TensorFlow
 *.pt
 *.bin
+*.h5
+*.ckpt
+
+# Ignorer les modèles TensorFlow Lite
+*.tflite
+
+# Ignorer les logs
+*.log
