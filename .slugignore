@@ -1,21 +1,18 @@
-# Ignorer les archives
-*.whl
+# Ignorer les notebooks Jupyter
+*.ipynb
+
+# Ignorer les fichiers de sauvegarde du modèle (si ce n'est pas le modèle final)
+*.h5
+*.pt
+
+# Ignorer les fichiers temporaires ou de logs
+*.log
+*.csv
 *.tar.gz
 *.zip
 
-# Ignorer les fichiers temporaires Python
-*.pyc
-*.pyo
+# Ignorer les fichiers de test
+tests/
+
+# Ignorer les répertoires inutiles
 __pycache__/
-
-# Ignorer les modèles PyTorch et TensorFlow
-*.pt
-*.bin
-*.h5
-*.ckpt
-
-# Ignorer les modèles TensorFlow Lite
-*.tflite
-
-# Ignorer les logs
-*.log
