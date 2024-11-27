@@ -8,3 +8,4 @@ pandas==1.3.3
 nest-asyncio
 pyngrok==7.2.1
 nltk
+gensim
