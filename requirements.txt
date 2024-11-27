@@ -4,5 +4,5 @@ gunicorn==20.1.0
 pandas==1.5.3
 fastapi
 nest-asyncio
-tflite-runtime==2.15.1
+tflite-runtime==2.14.0
 azure-storage-blob
