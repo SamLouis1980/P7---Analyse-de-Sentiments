@@ -20,7 +20,6 @@ Original file is located at
 
 from fastapi import FastAPI
 from pydantic import BaseModel
-import tensorflow as tf
 import numpy as np
 from tensorflow.lite.python.interpreter import Interpreter
 from azure.storage.blob import BlobServiceClient
