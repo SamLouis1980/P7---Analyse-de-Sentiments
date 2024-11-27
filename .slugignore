@@ -1,6 +1,9 @@
 # Ignorer les notebooks Jupyter
 *.ipynb
 
+# Ignorer les checkpoints de Jupyter
+.ipynb_checkpoints/
+
 # Ignorer les fichiers de sauvegarde du modèle (si ce n'est pas le modèle final)
 *.h5
 *.pt
