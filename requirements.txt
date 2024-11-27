@@ -4,11 +4,6 @@ gunicorn==20.1.0
 transformers==4.30.2
 pandas==1.5.3
 fastapi
-uvicorn
 nest-asyncio
-pyngrok
-transformers
-datasets
-tensorflow
+tflite-runtime
 azure-storage-blob
-contractions
