@@ -279,7 +279,3 @@ if __name__ == "__main__":
 
     # Lancer l'API FastAPI
     uvicorn.run(app, host="0.0.0.0", port=8181)
-
-!git commit -m "commit depuis Google Colab"
-!git remote add origin https://github.com/SamLouis1980/P7---Analyse-de-Sentiments.git  # Remplace par l'URL de ton dépôt GitHub
-!git push -u origin model  # Pousse vers la branche principale (master)
