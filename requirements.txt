@@ -1,8 +1,7 @@
+tflite-runtime==2.14.0
+azure-storage-blob
 fastapi==0.95.1
 uvicorn==0.22.0
 gunicorn==20.1.0
 pandas==1.5.3
-fastapi
 nest-asyncio
-tflite-runtime==2.14.0
-azure-storage-blob
