@@ -1,1 +1,1 @@
-web: streamlit run script_API.py --server.port $PORT
+web: streamlit run script_API.py
