@@ -11,27 +11,11 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.feature_extraction.text import TfidfVectorizer
 import requests
 
-# Fonction pour télécharger un fichier depuis GitHub
-def download_file_from_github(file_url, save_path):
-    """
-    Télécharge un fichier depuis GitHub et le sauvegarde localement.
-    Args:
-        file_url (str): URL du fichier GitHub.
-        save_path (str): Chemin où sauvegarder le fichier téléchargé.
-    """
-    response = requests.get(file_url)
-    if response.status_code == 200:
-        with open(save_path, 'wb') as f:
-            f.write(response.content)
-        print(f"Fichier téléchargé et sauvegardé sous : {save_path}")
-    else:
-        print(f"Erreur de téléchargement du fichier : {file_url}")
-
 # URL des fichiers sauvegardés sur GitHub
 model_url = "https://github.com/SamLouis1980/P7---Analyse-de-Sentiments/raw/main/data/log_reg_model.pkl"
 vectorizer_url = "https://github.com/SamLouis1980/P7---Analyse-de-Sentiments/raw/main/data/tfidf_vectorizer.pkl"
 
- Fonction pour télécharger un fichier depuis GitHub
+#Fonction pour télécharger un fichier depuis GitHub
 def download_file_from_github(file_url, save_path):
     """
     Télécharge un fichier depuis GitHub et le sauvegarde localement.
