@@ -2,7 +2,7 @@ fastapi==0.95.0
 uvicorn==0.21.1
 scikit-learn==1.2.2
 nltk==3.9.1
-contractions==0.0.51
+contractions==0.0.50
 requests==2.32.3
 pandas==2.2.3
 numpy==1.21.0
