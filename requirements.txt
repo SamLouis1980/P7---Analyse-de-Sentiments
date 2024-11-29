@@ -3,3 +3,4 @@ uvicorn
 requests
 nltk==3.6.3
 contractions==0.0.45
+scikit-learn==1.2.2
