@@ -11,6 +11,9 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.feature_extraction.text import TfidfVectorizer
 import requests
 
+# Télécharger les stopwords si nécessaire
+nltk.download('stopwords')
+
 # URL des fichiers sauvegardés sur GitHub
 model_url = "https://github.com/SamLouis1980/P7---Analyse-de-Sentiments/raw/main/data/log_reg_model.pkl"
 vectorizer_url = "https://github.com/SamLouis1980/P7---Analyse-de-Sentiments/raw/main/data/tfidf_vectorizer.pkl"
