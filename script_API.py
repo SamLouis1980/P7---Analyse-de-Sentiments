@@ -28,7 +28,7 @@ def download_file_from_github(file_url, save_path):
         print(f"Erreur de téléchargement du fichier : {file_url}")
 
 # URL des fichiers sauvegardés sur GitHub
-model_url = "https://github.com/SamLouis1980/P7---Analyse-de-Sentiments/raw/main/log_regression_model.pkl"
+model_url = "https://github.com/SamLouis1980/P7---Analyse-de-Sentiments/raw/main/log_reg_model.pkl"
 vectorizer_url = "https://github.com/SamLouis1980/P7---Analyse-de-Sentiments/raw/main/vectorizer.pkl"
 
 # Télécharger le modèle et le vectoriseur
