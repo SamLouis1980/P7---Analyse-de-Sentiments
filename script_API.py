@@ -50,6 +50,12 @@ if os.path.exists(vectorizer_path):
 else:
     print(f"Le fichier {vectorizer_path} n'a pas été trouvé.")
 
+# Vérifier si le vectoriseur est bien ajusté
+if len(vectorizer.get_feature_names_out()) == 0:
+    print("Le vectoriseur n'a pas été ajusté correctement.")
+else:
+    print(f"Le vectoriseur a été chargé avec {len(vectorizer.get_feature_names_out())} mots dans le vocabulaire.")
+    
 # Définir les stopwords
 stop_words = set(nltk.corpus.stopwords.words('english'))
 
