@@ -36,7 +36,7 @@ download_file_from_github(model_url, "log_regression_model.pkl")
 download_file_from_github(vectorizer_url, "vectorizer.pkl")
 
 # Charger le modèle de régression logistique et le vectoriseur
-log_reg_model = joblib.load('log_regression_model.pkl')  # Charger le modèle
+log_reg_model = joblib.load('log_reg_model.pkl')  # Charger le modèle
 vectorizer = joblib.load('vectorizer.pkl')  # Charger le vectoriseur
 
 # Définir les stopwords
