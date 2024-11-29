@@ -28,16 +28,16 @@ def download_file_from_github(file_url, save_path):
         print(f"Erreur de téléchargement du fichier : {file_url}")
 
 # URL des fichiers sauvegardés sur GitHub
-model_url = "https://github.com/SamLouis1980/P7---Analyse-de-Sentiments/raw/main/log_reg_model.pkl"
-vectorizer_url = "https://github.com/SamLouis1980/P7---Analyse-de-Sentiments/raw/main/tfidf_vectorizer.pkl"
+model_url = "https://github.com/SamLouis1980/P7---Analyse-de-Sentiments/raw/main/data/log_reg_model.pkl"
+vectorizer_url = "https://github.com/SamLouis1980/P7---Analyse-de-Sentiments/raw/main/data/tfidf_vectorizer.pkl"
 
-# Télécharger le modèle et le vectoriseur
-download_file_from_github(model_url, "log_reg_model.pkl")
-download_file_from_github(vectorizer_url, "tfidf_vectorizer.pkl")
+# Télécharger le modèle et le vectoriseur dans le dossier 'data'
+download_file_from_github(model_url, "data/log_reg_model.pkl")
+download_file_from_github(vectorizer_url, "data/tfidf_vectorizer.pkl")
 
 # Charger le modèle de régression logistique et le vectoriseur
-log_reg_model = joblib.load('log_reg_model.pkl')  # Charger le modèle
-vectorizer = joblib.load('tfidf_vectorizer.pkl')  # Charger le vectoriseur
+log_reg_model = joblib.load('data/log_reg_model.pkl')  # Charger le modèle
+vectorizer = joblib.load('data/tfidf_vectorizer.pkl')  # Charger le vectoriseur
 
 # Définir les stopwords
 stop_words = set(nltk.corpus.stopwords.words('english'))
