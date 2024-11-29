@@ -32,12 +32,12 @@ model_url = "https://github.com/SamLouis1980/P7---Analyse-de-Sentiments/raw/main
 vectorizer_url = "https://github.com/SamLouis1980/P7---Analyse-de-Sentiments/raw/main/data/tfidf_vectorizer.pkl"
 
 # Télécharger le modèle et le vectoriseur dans le dossier 'data'
-download_file_from_github(model_url, "data/log_reg_model.pkl")
-download_file_from_github(vectorizer_url, "data/tfidf_vectorizer.pkl")
+download_file_from_github(model_url, "/content/data/log_reg_model.pkl")
+download_file_from_github(vectorizer_url, "/content/data/tfidf_vectorizer.pkl")
 
 # Charger le modèle de régression logistique et le vectoriseur
-log_reg_model = joblib.load('data/log_reg_model.pkl')  # Charger le modèle
-vectorizer = joblib.load('data/tfidf_vectorizer.pkl')  # Charger le vectoriseur
+log_reg_model = joblib.load('/content/data/log_reg_model.pkl')  # Charger le modèle
+vectorizer = joblib.load('/content/data/tfidf_vectorizer.pkl')  # Charger le vectoriseur
 
 # Définir les stopwords
 stop_words = set(nltk.corpus.stopwords.words('english'))
