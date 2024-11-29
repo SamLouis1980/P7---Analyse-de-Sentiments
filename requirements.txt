@@ -1,3 +1,4 @@
 fastapi
 uvicorn
 requests
+nltk==3.6.3
