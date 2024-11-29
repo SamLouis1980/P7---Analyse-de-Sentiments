@@ -16,8 +16,8 @@ with open('data/log_reg_model.pkl', 'rb') as f:
 with open('data/tfidf_vectorizer.pkl', 'rb') as f:
     vectorizer = pickle.load(f)
 
-# Télécharger les stopwords si nécessaire
-nltk.download('stopwords')
+# Charger les stopwords une fois et les garder en mémoire
+stopwords_set = set(nltk.corpus.stopwords.words('english'))
 
 # Créer une application FastAPI
 app = FastAPI()
@@ -35,7 +35,7 @@ def nettoyer_texte(texte):
     texte = re.sub(r'#\w+', '', texte)
     texte = re.sub(r'[^\w\s]', '', texte)
     texte = re.sub(r'\d+', '', texte)
-    texte = ' '.join([word for word in texte.split() if word not in nltk.corpus.stopwords.words('english')])
+    texte = ' '.join([word for word in texte.split() if word not in stopwords_set])
     texte = re.sub(r'\s+', ' ', texte).strip()
     return texte
 
