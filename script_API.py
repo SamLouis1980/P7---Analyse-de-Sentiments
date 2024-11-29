@@ -5,7 +5,7 @@ import numpy as np
 import pandas as pd
 import re
 import nltk
-import joblib  # Pour charger le modèle et le vectoriseur
+import pickle
 import contractions
 from sklearn.linear_model import LogisticRegression
 from sklearn.feature_extraction.text import TfidfVectorizer
@@ -33,8 +33,12 @@ download_file_from_github(model_url, "./data/log_reg_model.pkl")
 download_file_from_github(vectorizer_url, "./data/tfidf_vectorizer.pkl")
 
 # Charger le modèle de régression logistique et le vectoriseur
-log_reg_model = joblib.load('./data/log_reg_model.pkl')  # Charger le modèle
-vectorizer = joblib.load('./data/tfidf_vectorizer.pkl')  # Charger le vectoriseur
+# Charger le modèle avec pickle
+with open('data/log_reg_model.pkl', 'rb') as f:
+    log_reg_model = pickle.load(f)
+# Charger le vectoriseur avec pickle
+with open('data/tfidf_vectorizer.pkl', 'rb') as f:
+    vectorizer = pickle.load(f)
 
 # Définir les stopwords
 stop_words = set(nltk.corpus.stopwords.words('english'))
