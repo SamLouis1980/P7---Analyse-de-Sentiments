@@ -18,7 +18,7 @@ nltk.download('stopwords')
 model_url = "https://github.com/SamLouis1980/P7---Analyse-de-Sentiments/raw/main/data/log_reg_model.pkl"
 vectorizer_url = "https://github.com/SamLouis1980/P7---Analyse-de-Sentiments/raw/main/data/tfidf_vectorizer.pkl"
 
-#Fonction pour télécharger un fichier depuis GitHub
+# Fonction pour télécharger un fichier depuis GitHub
 def download_file_from_github(file_url, save_path):
     """
     Télécharge un fichier depuis GitHub et le sauvegarde localement.
@@ -35,12 +35,10 @@ def download_file_from_github(file_url, save_path):
 download_file_from_github(model_url, "./data/log_reg_model.pkl")
 download_file_from_github(vectorizer_url, "./data/tfidf_vectorizer.pkl")
 
-# Charger le modèle de régression logistique et le vectoriseur
-
-# Charger le modèle avec pickle
+# Charger le modèle de régression logistique
 with open('data/log_reg_model.pkl', 'rb') as f:
     log_reg_model = pickle.load(f)
-    
+
 # Vérification que le fichier existe avant de tenter de le charger
 vectorizer_path = 'data/tfidf_vectorizer.pkl'
 if os.path.exists(vectorizer_path):
@@ -55,7 +53,7 @@ if len(vectorizer.get_feature_names_out()) == 0:
     print("Le vectoriseur n'a pas été ajusté correctement.")
 else:
     print(f"Le vectoriseur a été chargé avec {len(vectorizer.get_feature_names_out())} mots dans le vocabulaire.")
-    
+
 # Définir les stopwords
 stop_words = set(nltk.corpus.stopwords.words('english'))
 
@@ -107,6 +105,3 @@ if st.button("Analyser"):
         st.write(f"Le sentiment du tweet est : {sentiment}")
     else:
         st.write("Veuillez entrer un tweet pour l'analyser.")
-
-# Fonctionnalité de feedback
-feedback = st.radio("Le sentiment prédit est-il correct ?", ('Oui', 'Non'))
