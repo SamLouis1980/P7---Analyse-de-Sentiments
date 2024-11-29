@@ -3,7 +3,7 @@ import streamlit as st
 import requests
 
 # URL de l'API FastAPI
-api_url = "http://127.0.0.1:8000/predict"  # Assure-toi que l'API est en cours d'exécution
+api_url = "http://127.0.0.1:8000/predict"
 
 # Application Streamlit
 st.title("Analyse de Sentiment des Tweets")
