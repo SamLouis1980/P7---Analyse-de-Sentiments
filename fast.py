@@ -39,6 +39,10 @@ def nettoyer_texte(texte):
     texte = re.sub(r'\s+', ' ', texte).strip()
     return texte
 
+@app.get("/")
+def read_root():
+    return {"message": "Bienvenue sur l'API de prédiction de sentiment"}
+
 # Route pour effectuer la prédiction
 @app.post("/predict")
 def predict(request: TextRequest):
