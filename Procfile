@@ -1,1 +1,1 @@
-web: streamlit run script_API.py --server.port $PORT
+web: uvicorn fast:app --host=0.0.0.0 --port=${PORT:-5000}
