@@ -9,7 +9,7 @@ COPY requirements.txt /app/requirements.txt
 RUN pip install --no-cache-dir -r requirements.txt
 
 # Copier le script Streamlit dans le conteneur
-COPY script_API.py /app/script_API.py
+COPY script_API.py /app/main/script_API.py
 
 # Exposer le port 8501 pour Streamlit
 EXPOSE 8501
