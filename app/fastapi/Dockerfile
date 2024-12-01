@@ -11,6 +11,9 @@ RUN pip install --no-cache-dir -r /app/fastapi/requirements.txt
 # Copier le script FastAPI dans le conteneur
 COPY app/fastapi/fast.py /app/fastapi/fast.py
 
+# Copier le dossier 'data' pour les modèles dans le conteneur
+COPY data /app/fastapi/data
+
 # Exposer le port 8000 pour FastAPI
 EXPOSE 8000
 
