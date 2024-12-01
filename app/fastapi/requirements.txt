@@ -1,0 +1,8 @@
+fastapi==0.95.0
+uvicorn==0.21.1
+nltk==3.9.1
+contractions==0.0.50
+requests==2.32.3
+pandas
+numpy==1.23.3
+scikit-learn==1.5.2
