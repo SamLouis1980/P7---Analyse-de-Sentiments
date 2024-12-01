@@ -9,7 +9,7 @@ COPY requirements.txt /app/requirements.txt
 RUN pip install --no-cache-dir -r requirements.txt
 
 # Copier le script FastAPI dans le conteneur
-COPY fast.py /app/fast.py
+COPY fast.py /app/fastapi/fast.py
 
 # Exposer le port 8000 pour FastAPI
 EXPOSE 8000
