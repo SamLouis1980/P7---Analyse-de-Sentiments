@@ -1,0 +1,26 @@
+version: '3.8'
+
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: app/fastapi/Dockerfile  # Chemin vers le Dockerfile pour FastAPI
+    ports:
+      - "8000:8000"  # Mappe le port 8000 du conteneur au port 8000 de la machine
+    networks:
+      - app_network
+
+  frontend:
+    build:
+      context: .
+      dockerfile: app/main/Dockerfile  # Chemin vers le Dockerfile pour Streamlit
+    ports:
+      - "8501:8501"  # Mappe le port 8501 du conteneur au port 8501 de la machine
+    depends_on:
+      - backend  # S'assurer que backend soit prêt avant de démarrer le frontend
+    networks:
+      - app_network
+
+networks:
+  app_network:
+    driver: bridge
