@@ -1,21 +1,19 @@
-# Utiliser une image de base Windows Server Core
+# Utiliser une image de base Windows Server Core avec Python déjà inclus
 FROM mcr.microsoft.com/windows/servercore:ltsc2019
 
 # Définir le répertoire de travail dans le conteneur
 WORKDIR /app/fastapi
 
-# Installer Python (si nécessaire, Windows Server Core ne le fournit pas par défaut)
+# Installer Chocolatey (si non déjà installé) et Python 3.9
 RUN powershell -Command \
-    Invoke-WebRequest -Uri https://www.python.org/ftp/python/3.9.7/python-3.9.7.exe -OutFile python-installer.exe; \
-    Start-Process -Wait -FilePath python-installer.exe /quiet InstallAllUsers=1 PrependPath=1; \
-    Remove-Item -Force python-installer.exe
+    Set-ExecutionPolicy Bypass -Scope Process -Force; \
+    Invoke-WebRequest https://community.chocolatey.org/install.ps1 -OutFile install.ps1; \
+    PowerShell -NoProfile -ExecutionPolicy Bypass -Command "& .\install.ps1"; \
+    Remove-Item -Force install.ps1; \
+    choco install python --version=3.9.7 -y
 
-# Ajouter Python au PATH
-RUN powershell -Command \
-    [System.Environment]::SetEnvironmentVariable('Path', $Env:Path + ';C:\\Program Files\\Python39;C:\\Program Files\\Python39\\Scripts', [System.EnvironmentVariableTarget]::Machine)
-
-# Vérifier si Python est installé et accessible
-RUN powershell -Command python --version
+# Vérification de Python
+RUN python --version
 
 # Copier le fichier requirements.txt pour installer les dépendances
 COPY requirements.txt /app/fastapi/requirements.txt
@@ -34,4 +32,3 @@ EXPOSE 8000
 
 # Commande pour démarrer Uvicorn et exécuter FastAPI
 CMD ["uvicorn", "fast:app", "--host=0.0.0.0", "--port=8000"]
-
