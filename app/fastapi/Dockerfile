@@ -1,5 +1,5 @@
-# Utiliser une image Windows avec Python déjà installé
-FROM mcr.microsoft.com/windows/python:3.9
+# Utiliser une image Windows avec Python 3.9 déjà installé
+FROM mcr.microsoft.com/windows-cssc/python:3.9-servercore-ltsc2022
 
 # Définir le répertoire de travail dans le conteneur
 WORKDIR /app/fastapi
