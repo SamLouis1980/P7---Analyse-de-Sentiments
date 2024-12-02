@@ -11,6 +11,7 @@ RUN powershell -Command \
     Remove-Item -Force python-installer.exe
 
 # Vérifier que Python est bien installé
+RUN echo $Env:Path
 RUN python --version
 
 # Assurer que pip est installé et à jour
