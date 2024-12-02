@@ -4,15 +4,13 @@ FROM mcr.microsoft.com/windows/servercore:ltsc2019
 # Définir le répertoire de travail dans le conteneur
 WORKDIR /app/fastapi
 
-# Installer Chocolatey (si nécessaire) et Python 3.9
+# Télécharger et installer Python directement
 RUN powershell -Command \
-    Set-ExecutionPolicy Bypass -Scope Process -Force; \
-    Invoke-WebRequest https://community.chocolatey.org/install.ps1 -OutFile install.ps1; \
-    PowerShell -NoProfile -ExecutionPolicy Bypass -Command ".\\install.ps1"; \
-    Remove-Item -Force install.ps1; \
-    choco install python --version=3.9.7 -y
+    Invoke-WebRequest -Uri https://www.python.org/ftp/python/3.9.7/python-3.9.7.exe -OutFile python-installer.exe; \
+    Start-Process -Wait -FilePath python-installer.exe /quiet InstallAllUsers=1 PrependPath=1; \
+    Remove-Item -Force python-installer.exe
 
-# Vérification de Python
+# Vérifier l'installation de Python
 RUN python --version
 
 # Copier le fichier requirements.txt pour installer les dépendances
