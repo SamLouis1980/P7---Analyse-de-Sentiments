@@ -6,7 +6,8 @@ services:
       context: .
       dockerfile: app/fastapi/Dockerfile  # Chemin vers le Dockerfile pour FastAPI
     volumes:
-      - .:/app
+      - ./app/fastapi:/app/fastapi
+      - ./data:/app/fastapi/data
     ports:
       - "8000:8000"  # Mappe le port 8000 du conteneur au port 8000 de la machine
     networks:
