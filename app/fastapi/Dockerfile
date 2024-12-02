@@ -10,13 +10,8 @@ RUN powershell -Command \
     Start-Process -Wait -FilePath python-installer.exe /quiet InstallAllUsers=1 PrependPath=1; \
     Remove-Item -Force python-installer.exe
 
-# Ajouter Python au PATH si nécessaire avec un fichier batch
-RUN echo 'setx PATH "%PATH%;C:\\Program Files\\Python39;C:\\Program Files\\Python39\\Scripts"' > set_python_path.bat && \
-    setx PATH "%PATH%;C:\\Program Files\\Python39;C:\\Program Files\\Python39\\Scripts"
-
-# Vérifier l'installation de Python et pip
+# Vérifier si Python est installé correctement
 RUN python --version
-RUN pip --version
 
 # Copier le fichier requirements.txt pour installer les dépendances
 COPY requirements.txt /app/fastapi/requirements.txt
