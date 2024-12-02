@@ -22,6 +22,9 @@ COPY app/fastapi/fast.py /app/fastapi/fast.py
 # Copier le dossier 'data' depuis la racine du projet vers le conteneur
 COPY data /app/fastapi/data
 
+# Copier le fichier requirements.txt dans le conteneur
+COPY requirements.txt /app/fastapi/requirements.txt
+
 # Exposer le port 8000 pour FastAPI
 EXPOSE 8000
 
