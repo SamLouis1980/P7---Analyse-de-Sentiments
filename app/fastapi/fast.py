@@ -48,6 +48,32 @@ def nettoyer_texte(texte):
     texte = re.sub(r'\s+', ' ', texte).strip()
     return texte
 
+# Fonction pour sauvegarder les feedbacks dans un fichier CSV
+def save_feedback_to_csv(feedback_request):
+    feedback_data = {
+        "text": feedback_request.text,
+        "prediction": feedback_request.prediction,
+        "feedback": feedback_request.feedback
+    }
+    
+    # Définir le chemin du fichier CSV dans la racine du projet
+    csv_file_path = 'feedbacks.csv'
+    
+    # Si le fichier CSV n'existe pas, on ajoute l'en-tête
+    file_exists = os.path.isfile(csv_file_path)
+    
+    with open(csv_file_path, mode='a', newline='', encoding='utf-8') as file:
+        fieldnames = ["text", "prediction", "feedback"]
+        writer = csv.DictWriter(file, fieldnames=fieldnames)
+        
+        # Si le fichier n'existe pas, on écrit l'en-tête
+        if not file_exists:
+            writer.writeheader()
+            
+        # Écrire les données du feedback dans le fichier CSV
+        writer.writerow(feedback_data)
+
+
 @app.get("/")
 def read_root():
     return {"message": "Bienvenue sur l'API de prédiction de sentiment"}
@@ -60,19 +86,6 @@ def predict(request: TextRequest):
     prediction = log_reg_model.predict(text_vector)
     sentiment = "positif" if prediction == 1 else "négatif"
     return {"sentiment": sentiment}
-
-# Fonction pour sauvegarder les feedbacks dans un fichier CSV
-def save_feedback_to_csv(feedback_request: FeedbackRequest):
-    feedback_file = 'feedbacks.csv'  # Chemin du fichier CSV
-
-    # Si le fichier n'existe pas, créer le fichier et ajouter l'en-tête
-    file_exists = os.path.exists(feedback_file)
-    with open(feedback_file, mode='a', newline='', encoding='utf-8') as file:
-        writer = csv.writer(file)
-        if not file_exists:
-            # Écrire l'en-tête si c'est un nouveau fichier
-            writer.writerow(['text', 'prediction', 'feedback'])
-        writer.writerow([feedback_request.text, feedback_request.prediction, feedback_request.feedback])
 
 # Route pour enregistrer le feedback de l'utilisateur
 @app.post("/feedback")
