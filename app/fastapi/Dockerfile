@@ -18,5 +18,5 @@ COPY data /app/fastapi/data
 EXPOSE 8000
 
 # Commande pour démarrer Uvicorn et exécuter FastAPI
-CMD ["uvicorn", "fastapi.fast:app", "--host=0.0.0.0", "--port=8000"]
+CMD ["uvicorn", "fast:app", "--host=0.0.0.0", "--port=8000"]
 
