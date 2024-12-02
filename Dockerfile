@@ -21,4 +21,4 @@ COPY script_API.py /app/script_API.py
 EXPOSE 8501
 
 # Commande pour démarrer Streamlit
-CMD ["streamlit", "run", "/app/script_API.py", "--server.address", "0.0.0.0", "--server.port", "8501"]
+CMD ["streamlit", "run", "script_API.py", "--server.address", "0.0.0.0", "--server.port", "8501"]
