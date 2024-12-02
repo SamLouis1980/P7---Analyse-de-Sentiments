@@ -1,14 +1,14 @@
-# Utiliser une image de base Windows Server Core avec Python déjà inclus
+# Utiliser une image de base Windows Server Core
 FROM mcr.microsoft.com/windows/servercore:ltsc2019
 
 # Définir le répertoire de travail dans le conteneur
 WORKDIR /app/fastapi
 
-# Installer Chocolatey (si non déjà installé) et Python 3.9
+# Installer Chocolatey (si nécessaire) et Python 3.9
 RUN powershell -Command \
     Set-ExecutionPolicy Bypass -Scope Process -Force; \
     Invoke-WebRequest https://community.chocolatey.org/install.ps1 -OutFile install.ps1; \
-    PowerShell -NoProfile -ExecutionPolicy Bypass -Command "& .\install.ps1"; \
+    PowerShell -NoProfile -ExecutionPolicy Bypass -Command ".\\install.ps1"; \
     Remove-Item -Force install.ps1; \
     choco install python --version=3.9.7 -y
 
