@@ -9,7 +9,7 @@ COPY app/main/requirements.txt /app/main/requirements.txt
 RUN pip install --no-cache-dir -r /app/main/requirements.txt
 
 # Copier le script Streamlit dans le conteneur
-COPY app/main/script_API.py /app/main/script_API.py
+COPY script_API.py /app/main/script_API.py
 
 # Commande pour démarrer Streamlit
 CMD ["streamlit", "run", "script_API.py", "--server.address", "0.0.0.0", "--server.port", "$PORT"]
