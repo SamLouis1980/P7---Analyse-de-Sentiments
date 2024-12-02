@@ -7,6 +7,7 @@ import contractions
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.linear_model import LogisticRegression
 import os
+import csv
 
 # Charger les modèles et le vectoriseur depuis le répertoire du projet
 model_path = os.path.join(os.getcwd(), 'data', 'log_reg_model.pkl')
@@ -45,6 +46,24 @@ def nettoyer_texte(texte):
     texte = ' '.join([word for word in texte.split() if word not in nltk.corpus.stopwords.words('english')])
     texte = re.sub(r'\s+', ' ', texte).strip()
     return texte
+
+# Fonction pour sauvegarder les feedbacks dans un fichier CSV
+def save_feedback_to_csv(feedback_request):
+    csv_file_path = 'feedbacks.csv'
+    
+    # Vérifier si le fichier existe déjà pour ne pas ajouter l'en-tête plusieurs fois
+    file_exists = os.path.isfile(csv_file_path)
+    
+    # Ouvrir le fichier en mode ajout ('a')
+    with open(csv_file_path, mode='a', newline='', encoding='utf-8') as file:
+        writer = csv.writer(file)
+        
+        # Si le fichier est vide, écrire les en-têtes
+        if not file_exists:
+            writer.writerow(['Tweet', 'Prédiction', 'Feedback'])
+        
+        # Ajouter la ligne avec les données du feedback
+        writer.writerow([feedback_request.text, feedback_request.prediction, feedback_request.feedback])
 
 @app.get("/")
 def read_root():
