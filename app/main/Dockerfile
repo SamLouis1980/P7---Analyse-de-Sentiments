@@ -17,8 +17,11 @@ RUN pip install --no-cache-dir -r /app/main/requirements.txt
 # Copier le script Streamlit dans le conteneur
 COPY app/main/script_API.py /app/main/script_API.py
 
+# Vérifier les fichiers copiés dans le conteneur
+RUN dir /app/main
+
 # Exposer le port 8501 pour Streamlit
 EXPOSE 8501
 
 # Commande pour démarrer Streamlit
-CMD ["streamlit", "run", "script_API.py", "--server.address", "0.0.0.0", "--server.port", "8501"]
+CMD ["streamlit", "run", "/app/main/script_API.py", "--server.address", "0.0.0.0", "--server.port", "8501"]
