@@ -1,17 +1,8 @@
-# Utiliser une image de base Windows Server Core
-FROM mcr.microsoft.com/windows/servercore:ltsc2019
+# Utiliser une image Windows avec Python déjà installé
+FROM mcr.microsoft.com/windows/servercore:ltsc2022
 
 # Définir le répertoire de travail dans le conteneur
 WORKDIR /app/fastapi
-
-# Télécharger et installer Python directement
-RUN powershell -Command \
-    Invoke-WebRequest -Uri https://www.python.org/ftp/python/3.9.7/python-3.9.7.exe -OutFile python-installer.exe; \
-    Start-Process -Wait -FilePath python-installer.exe /quiet InstallAllUsers=1 PrependPath=1; \
-    Remove-Item -Force python-installer.exe
-
-# Vérifier l'installation de Python
-RUN python --version
 
 # Copier le fichier requirements.txt pour installer les dépendances
 COPY requirements.txt /app/fastapi/requirements.txt
