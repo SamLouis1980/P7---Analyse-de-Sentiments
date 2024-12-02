@@ -5,7 +5,7 @@ FROM mcr.microsoft.com/windows-cssc/python:3.9-servercore-ltsc2022
 WORKDIR /app/main
 
 # Copier le fichier requirements.txt pour installer les dépendances
-COPY app/main/requirements.txt /app/main/requirements.txt
+COPY requirements.txt /app/main/requirements.txt
 RUN pip install --no-cache-dir -r /app/main/requirements.txt
 
 # Copier le script Streamlit dans le conteneur
