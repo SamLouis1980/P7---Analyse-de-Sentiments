@@ -10,13 +10,13 @@ RUN powershell -Command \
     Start-Process -Wait -FilePath python-installer.exe /quiet InstallAllUsers=1 PrependPath=1; \
     Remove-Item -Force python-installer.exe
 
-# Vérifier que Python est bien installé
-RUN echo $Env:Path
-RUN python --version
+# Ajouter Python au PATH si nécessaire
+RUN powershell -Command \
+    [System.Environment]::SetEnvironmentVariable('Path', $Env:Path + ';C:\Program Files\Python39\Scripts\;C:\Program Files\Python39\', [System.EnvironmentVariableTarget]::Machine)
 
-# Assurer que pip est installé et à jour
-RUN python -m ensurepip --upgrade
-RUN python -m pip install --upgrade pip
+# Vérifier l'installation de Python et pip
+RUN python --version
+RUN pip --version
 
 # Copier le fichier requirements.txt pour installer les dépendances
 COPY requirements.txt /app/fastapi/requirements.txt
@@ -35,3 +35,4 @@ EXPOSE 8000
 
 # Commande pour démarrer Uvicorn et exécuter FastAPI
 CMD ["uvicorn", "fast:app", "--host=0.0.0.0", "--port=8000"]
+
