@@ -11,7 +11,7 @@ RUN powershell -Command \
     Remove-Item -Force python-installer.exe
 
 # Copier le fichier requirements.txt pour installer les dépendances
-COPY app/fastapi/requirements.txt /app/fastapi/requirements.txt
+COPY requirements.txt /app/fastapi/requirements.txt
 # Chemin relatif vers requirements.txt
 RUN pip install --no-cache-dir -r /app/fastapi/requirements.txt
 
