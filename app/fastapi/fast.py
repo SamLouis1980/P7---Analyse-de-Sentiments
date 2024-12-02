@@ -54,11 +54,15 @@ feedback_file_path = '/app/fastapi/data/feedbacks.csv'
 # Fonction pour sauvegarder les feedbacks dans un fichier CSV
 def save_feedback_to_csv(feedback_request):
     file_exists = os.path.exists(feedback_file_path)
+
+    # Ouvrir le fichier en mode ajout
     with open(feedback_file_path, mode='a', newline='', encoding='utf-8') as file:
-        writer = csv.writer(file)
+        writer = csv.writer(file, delimiter=';')  # Spécifier le séparateur comme point-virgule
+
         # Si le fichier est vide, ajouter l'en-tête
         if not file_exists:
             writer.writerow(['Tweet', 'Prediction', 'Feedback'])
+
         # Ajouter les données de feedback
         writer.writerow([feedback_request.text, feedback_request.prediction, feedback_request.feedback])
 
