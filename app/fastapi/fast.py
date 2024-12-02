@@ -60,5 +60,10 @@ def predict(request: TextRequest):
 
 @app.post("/feedback")
 def feedback(feedback_request: FeedbackRequest):
+    # Enregistrer ou traiter le feedback ici
     print(f"Feedback reçu : {feedback_request.text}, prédiction : {feedback_request.prediction}, feedback : {feedback_request.feedback}")
+    
+    # Sauvegarder le feedback dans le fichier CSV
+    save_feedback_to_csv(feedback_request)
+
     return {"message": "Feedback reçu avec succès"}
