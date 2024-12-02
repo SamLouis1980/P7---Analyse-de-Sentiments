@@ -10,14 +10,18 @@ RUN powershell -Command \
     Start-Process -Wait -FilePath python-installer.exe /quiet InstallAllUsers=1 PrependPath=1; \
     Remove-Item -Force python-installer.exe
 
-# Vérifier si Python est installé correctement
-RUN python --version
+# Ajouter Python au PATH
+RUN powershell -Command \
+    [System.Environment]::SetEnvironmentVariable('Path', $Env:Path + ';C:\\Program Files\\Python39;C:\\Program Files\\Python39\\Scripts', [System.EnvironmentVariableTarget]::Machine)
+
+# Vérifier si Python est installé et accessible
+RUN powershell -Command python --version
 
 # Copier le fichier requirements.txt pour installer les dépendances
 COPY requirements.txt /app/fastapi/requirements.txt
 
 # Installer les dépendances Python
-RUN pip install --no-cache-dir -r /app/fastapi/requirements.txt
+RUN python -m pip install --no-cache-dir -r /app/fastapi/requirements.txt
 
 # Copier le script FastAPI dans le conteneur
 COPY app/fastapi/fast.py /app/fastapi/fast.py
