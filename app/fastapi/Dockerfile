@@ -4,9 +4,6 @@ FROM mcr.microsoft.com/windows/servercore:ltsc2019
 # Définir le répertoire de travail dans le conteneur
 WORKDIR /app/fastapi
 
-# Copier le fichier requirements.txt pour installer les dépendances
-COPY app/fastapi/requirements.txt /app/fastapi/requirements.txt
-
 # Installer Python (si nécessaire, Windows Server Core ne le fournit pas par défaut)
 RUN powershell -Command \
     Invoke-WebRequest -Uri https://www.python.org/ftp/python/3.9.7/python-3.9.7.exe -OutFile python-installer.exe; \
@@ -22,8 +19,9 @@ COPY app/fastapi/fast.py /app/fastapi/fast.py
 # Copier le dossier 'data' depuis la racine du projet vers le conteneur
 COPY data /app/fastapi/data
 
-# Copier le fichier requirements.txt dans le conteneur
-COPY requirements.txt /app/fastapi/requirements.txt
+# Copier le fichier requirements.txt pour installer les dépendances
+COPY ../requirements.txt /app/fastapi/requirements.txt  # Chemin relatif vers requirements.txt
+RUN pip install --no-cache-dir -r /app/fastapi/requirements.txt
 
 # Exposer le port 8000 pour FastAPI
 EXPOSE 8000
