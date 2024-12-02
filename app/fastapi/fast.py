@@ -48,8 +48,8 @@ def nettoyer_texte(texte):
     texte = re.sub(r'\s+', ' ', texte).strip()
     return texte
 
-# Spécifie le chemin du fichier CSV à la racine du projet
-csv_file_path = os.path.join(os.getcwd(), 'feedbacks.csv')
+# Spécifie le chemin du fichier CSV
+csv_file_path = '/app/feedbacks.csv'
 
 # Fonction pour sauvegarder les feedbacks dans un fichier CSV
 def save_feedback_to_csv(feedback_request):
