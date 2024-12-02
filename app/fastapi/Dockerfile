@@ -10,11 +10,15 @@ RUN powershell -Command \
     Start-Process -Wait -FilePath python-installer.exe /quiet InstallAllUsers=1 PrependPath=1; \
     Remove-Item -Force python-installer.exe
 
+# S'assurer que pip est installé après l'installation de Python
+RUN python -m ensurepip --upgrade
+RUN python -m pip install --upgrade pip
+
 # Copier le fichier requirements.txt pour installer les dépendances
 COPY requirements.txt /app/fastapi/requirements.txt
 
 # Installer les dépendances Python
-RUN pip install --no-cache-dir -r /app/fastapi/requirements.txt
+RUN python -m pip install --no-cache-dir -r /app/fastapi/requirements.txt
 
 # Copier le script FastAPI dans le conteneur
 COPY app/fastapi/fast.py /app/fastapi/fast.py
