@@ -49,7 +49,7 @@ def nettoyer_texte(texte):
     return texte
 
 # Spécifie le chemin du fichier CSV
-feedback_file_path = '/app/data/feedbacks.csv'
+feedback_file_path = '/app/fastapi/data/feedbacks.csv'
 
 # Fonction pour sauvegarder les feedbacks dans un fichier CSV
 def save_feedback_to_csv(feedback_request):
