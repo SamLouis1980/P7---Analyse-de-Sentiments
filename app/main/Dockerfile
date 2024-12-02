@@ -1,6 +1,9 @@
 # Utiliser une image Windows avec Python 3.9 déjà installé
 FROM mcr.microsoft.com/windows-cssc/python:3.9-servercore-ltsc2022
 
+# Créer le répertoire /app/main si nécessaire
+RUN mkdir -p /app/main
+
 # Définir le répertoire de travail dans le conteneur
 WORKDIR /app/main
 
