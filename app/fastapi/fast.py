@@ -28,6 +28,11 @@ app = FastAPI()
 class TextRequest(BaseModel):
     text: str
 
+class FeedbackRequest(BaseModel):
+    text: str
+    prediction: str
+    feedback: str
+
 # Fonction pour nettoyer le texte
 def nettoyer_texte(texte):
     texte = texte.lower()
@@ -53,3 +58,11 @@ def predict(request: TextRequest):
     prediction = log_reg_model.predict(text_vector)
     sentiment = "positif" if prediction == 1 else "négatif"
     return {"sentiment": sentiment}
+
+ Route pour enregistrer le feedback de l'utilisateur
+@app.post("/feedback")
+def feedback(feedback_request: FeedbackRequest):
+    # Enregistrer ou traiter le feedback ici
+    # Par exemple, l'enregistrer dans une base de données, ou l'utiliser pour améliorer le modèle
+    print(f"Feedback reçu : {feedback_request.text}, prédiction : {feedback_request.prediction}, feedback : {feedback_request.feedback}")
+    return {"message": "Feedback reçu avec succès"}
