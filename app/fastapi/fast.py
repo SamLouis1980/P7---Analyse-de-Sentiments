@@ -1,3 +1,5 @@
+import csv
+import os
 from fastapi import FastAPI
 from pydantic import BaseModel
 import pickle
@@ -7,7 +9,6 @@ import contractions
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.linear_model import LogisticRegression
 import os
-import csv
 
 # Charger les modèles et le vectoriseur depuis le répertoire du projet
 model_path = os.path.join(os.getcwd(), 'data', 'log_reg_model.pkl')
@@ -47,28 +48,11 @@ def nettoyer_texte(texte):
     texte = re.sub(r'\s+', ' ', texte).strip()
     return texte
 
-# Fonction pour sauvegarder les feedbacks dans un fichier CSV
-def save_feedback_to_csv(feedback_request):
-    csv_file_path = 'feedbacks.csv'
-    
-    # Vérifier si le fichier existe déjà pour ne pas ajouter l'en-tête plusieurs fois
-    file_exists = os.path.isfile(csv_file_path)
-    
-    # Ouvrir le fichier en mode ajout ('a')
-    with open(csv_file_path, mode='a', newline='', encoding='utf-8') as file:
-        writer = csv.writer(file)
-        
-        # Si le fichier est vide, écrire les en-têtes
-        if not file_exists:
-            writer.writerow(['Tweet', 'Prédiction', 'Feedback'])
-        
-        # Ajouter la ligne avec les données du feedback
-        writer.writerow([feedback_request.text, feedback_request.prediction, feedback_request.feedback])
-
 @app.get("/")
 def read_root():
     return {"message": "Bienvenue sur l'API de prédiction de sentiment"}
 
+# Route pour effectuer la prédiction
 @app.post("/predict")
 def predict(request: TextRequest):
     cleaned_text = nettoyer_texte(request.text)
@@ -77,12 +61,22 @@ def predict(request: TextRequest):
     sentiment = "positif" if prediction == 1 else "négatif"
     return {"sentiment": sentiment}
 
+# Fonction pour sauvegarder les feedbacks dans un fichier CSV
+def save_feedback_to_csv(feedback_request: FeedbackRequest):
+    feedback_file = 'feedbacks.csv'  # Chemin du fichier CSV
+
+    # Si le fichier n'existe pas, créer le fichier et ajouter l'en-tête
+    file_exists = os.path.exists(feedback_file)
+    with open(feedback_file, mode='a', newline='', encoding='utf-8') as file:
+        writer = csv.writer(file)
+        if not file_exists:
+            # Écrire l'en-tête si c'est un nouveau fichier
+            writer.writerow(['text', 'prediction', 'feedback'])
+        writer.writerow([feedback_request.text, feedback_request.prediction, feedback_request.feedback])
+
+# Route pour enregistrer le feedback de l'utilisateur
 @app.post("/feedback")
 def feedback(feedback_request: FeedbackRequest):
-    # Enregistrer ou traiter le feedback ici
-    print(f"Feedback reçu : {feedback_request.text}, prédiction : {feedback_request.prediction}, feedback : {feedback_request.feedback}")
-    
-    # Sauvegarder le feedback dans le fichier CSV
+    # Enregistrer le feedback dans le fichier CSV
     save_feedback_to_csv(feedback_request)
-
     return {"message": "Feedback reçu avec succès"}
