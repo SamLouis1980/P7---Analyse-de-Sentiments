@@ -1,5 +1,5 @@
-# Utiliser une image Python officielle
-FROM python:3.9-slim
+# Utiliser une image Windows avec Python déjà installé
+FROM mcr.microsoft.com/windows/python:3.9
 
 # Définir le répertoire de travail dans le conteneur
 WORKDIR /app/main
