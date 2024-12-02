@@ -48,6 +48,9 @@ def nettoyer_texte(texte):
     texte = re.sub(r'\s+', ' ', texte).strip()
     return texte
 
+# Spécifie le chemin du fichier CSV à la racine du projet
+csv_file_path = os.path.join(os.getcwd(), 'feedbacks.csv')
+
 # Fonction pour sauvegarder les feedbacks dans un fichier CSV
 def save_feedback_to_csv(feedback_request):
     feedback_data = {
@@ -55,23 +58,18 @@ def save_feedback_to_csv(feedback_request):
         "prediction": feedback_request.prediction,
         "feedback": feedback_request.feedback
     }
-    
-    # Définir le chemin du fichier CSV dans la racine du projet
-    csv_file_path = 'feedbacks.csv'
-    
-    # Si le fichier CSV n'existe pas, on ajoute l'en-tête
-    file_exists = os.path.isfile(csv_file_path)
-    
-    with open(csv_file_path, mode='a', newline='', encoding='utf-8') as file:
-        fieldnames = ["text", "prediction", "feedback"]
-        writer = csv.DictWriter(file, fieldnames=fieldnames)
-        
-        # Si le fichier n'existe pas, on écrit l'en-tête
-        if not file_exists:
-            writer.writeheader()
-            
-        # Écrire les données du feedback dans le fichier CSV
-        writer.writerow(feedback_data)
+
+    # Si le fichier n'existe pas, crée-le avec les en-têtes
+    if not os.path.exists(csv_file_path):
+        with open(csv_file_path, mode='w', newline='') as file:
+            writer = csv.DictWriter(file, fieldnames=feedback_data.keys())
+            writer.writeheader()  # écrire les en-têtes dans le fichier
+            writer.writerow(feedback_data)
+    else:
+        # Sinon, ajoute les nouvelles données
+        with open(csv_file_path, mode='a', newline='') as file:
+            writer = csv.DictWriter(file, fieldnames=feedback_data.keys())
+            writer.writerow(feedback_data)
 
 
 @app.get("/")
