@@ -10,9 +10,9 @@ RUN powershell -Command \
     Start-Process -Wait -FilePath python-installer.exe /quiet InstallAllUsers=1 PrependPath=1; \
     Remove-Item -Force python-installer.exe
 
-# Ajouter Python au PATH si nécessaire
-RUN powershell -Command \
-    [System.Environment]::SetEnvironmentVariable('Path', $Env:Path + ';C:\Program Files\Python39\Scripts\;C:\Program Files\Python39\', [System.EnvironmentVariableTarget]::Machine)
+# Ajouter Python au PATH si nécessaire avec un fichier batch
+RUN echo 'setx PATH "%PATH%;C:\\Program Files\\Python39;C:\\Program Files\\Python39\\Scripts"' > set_python_path.bat && \
+    setx PATH "%PATH%;C:\\Program Files\\Python39;C:\\Program Files\\Python39\\Scripts"
 
 # Vérifier l'installation de Python et pip
 RUN python --version
