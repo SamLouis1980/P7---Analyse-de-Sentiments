@@ -49,28 +49,18 @@ def nettoyer_texte(texte):
     return texte
 
 # Spécifie le chemin du fichier CSV
-csv_file_path = '/app/feedbacks.csv'
+feedback_file_path = '/app/data/feedbacks.csv'
 
 # Fonction pour sauvegarder les feedbacks dans un fichier CSV
 def save_feedback_to_csv(feedback_request):
-    feedback_data = {
-        "text": feedback_request.text,
-        "prediction": feedback_request.prediction,
-        "feedback": feedback_request.feedback
-    }
-
-    # Si le fichier n'existe pas, crée-le avec les en-têtes
-    if not os.path.exists(csv_file_path):
-        with open(csv_file_path, mode='w', newline='') as file:
-            writer = csv.DictWriter(file, fieldnames=feedback_data.keys())
-            writer.writeheader()  # écrire les en-têtes dans le fichier
-            writer.writerow(feedback_data)
-    else:
-        # Sinon, ajoute les nouvelles données
-        with open(csv_file_path, mode='a', newline='') as file:
-            writer = csv.DictWriter(file, fieldnames=feedback_data.keys())
-            writer.writerow(feedback_data)
-
+    file_exists = os.path.exists(feedback_file_path)
+    with open(feedback_file_path, mode='a', newline='') as file:
+        writer = csv.writer(file)
+        # Si le fichier est vide, ajouter l'en-tête
+        if not file_exists:
+            writer.writerow(['Tweet', 'Prediction', 'Feedback'])
+        # Ajouter les données de feedback
+        writer.writerow([feedback_request.text, feedback_request.prediction, feedback_request.feedback])
 
 @app.get("/")
 def read_root():
@@ -88,6 +78,7 @@ def predict(request: TextRequest):
 # Route pour enregistrer le feedback de l'utilisateur
 @app.post("/feedback")
 def feedback(feedback_request: FeedbackRequest):
-    # Enregistrer le feedback dans le fichier CSV
-    save_feedback_to_csv(feedback_request)
+    # Enregistrer ou traiter le feedback ici
+    save_feedback_to_csv(feedback_request)  # Sauvegarde le feedback dans le CSV
+    print(f"Feedback reçu : {feedback_request.text}, prédiction : {feedback_request.prediction}, feedback : {feedback_request.feedback}")
     return {"message": "Feedback reçu avec succès"}
