@@ -1,5 +1,5 @@
-# Utiliser une image Windows avec Python 3.9 déjà installé
-FROM mcr.microsoft.com/windows-cssc/python:3.9-servercore-ltsc2022
+# Utiliser une image Linux avec Python 3.9
+FROM python:3.9-slim
 
 # Définir le répertoire de travail dans le conteneur (répertoire racine du projet)
 WORKDIR /app
@@ -21,4 +21,4 @@ COPY script_API.py /app/script_API.py
 EXPOSE 8501
 
 # Commande pour démarrer Streamlit
-CMD ["streamlit", "run", "script_API.py", "--server.address", "0.0.0.0", "--server.port", "8501"]
+CMD ["streamlit", "run", "/app/script_API.py", "--server.address", "0.0.0.0", "--server.port", "8501"]
