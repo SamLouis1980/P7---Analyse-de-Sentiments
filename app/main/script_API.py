@@ -27,6 +27,7 @@ if st.button("Analyser"):
                 
                 # Afficher la prédiction
                 st.write(f"Le sentiment du tweet est : {sentiment}")
+                st.write("Si la prédiction est incorrecte, vous pouvez fournir un feedback ci-dessous.")
             else:
                 st.write(f"Erreur lors de la communication avec l'API. Code d'erreur : {response.status_code}")
         
@@ -36,8 +37,9 @@ if st.button("Analyser"):
     else:
         st.write("Veuillez entrer un tweet pour l'analyser.")
 
-# Ajouter un feedback utilisateur
-if st.session_state.get('prediction') is not None:
+# Vérifier que la prédiction existe dans l'état de session
+if 'prediction' in st.session_state and st.session_state['prediction'] is not None:
+    # Afficher un formulaire de feedback
     feedback = st.selectbox('La prédiction était-elle correcte ?', ('Sélectionnez une option', 'Oui', 'Non'))
     
     # Si l'utilisateur fournit un feedback "Non", envoyer une requête à l'API de feedback
@@ -56,3 +58,6 @@ if st.session_state.get('prediction') is not None:
                 st.write(f"Erreur lors de l'envoi du feedback. Code d'erreur : {feedback_response.status_code}")
         except requests.exceptions.RequestException as e:
             st.write(f"Erreur de connexion pour envoyer le feedback : {e}")
+
+else:
+    st.write("Aucune prédiction effectuée, veuillez soumettre un tweet pour analyser son sentiment.")
