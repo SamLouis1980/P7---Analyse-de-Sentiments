@@ -21,6 +21,16 @@ if st.button("Analyser"):
             result = response.json()
             sentiment = result['sentiment']
             st.write(f"Le sentiment du tweet est : {sentiment}")
+
+            # Ajout de la fonction de feedback
+            feedback = st.radio("Le sentiment est-il correct ?", ('Correct', 'Incorrect'))
+
+            # Si un feedback est donné
+            if feedback:
+                # Enregistrer le feedback (ici dans un fichier CSV)
+                with open('feedback.csv', 'a') as f:
+                    f.write(f"{text_input},{sentiment},{feedback}\n")
+                st.write("Merci pour votre feedback !")
         else:
             st.write("Erreur lors de la communication avec l'API.")
     else:
