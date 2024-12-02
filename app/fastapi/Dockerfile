@@ -16,8 +16,8 @@ COPY fast.py /app/fastapi/fast.py
 # Copier le dossier 'data' depuis la racine du projet vers le conteneur
 COPY data /app/fastapi/data
 
-# Exposer le port 8000 pour FastAPI
-EXPOSE 8000
+# Exposer le port 80 pour FastAPI
+EXPOSE 80
 
 # Commande pour démarrer Uvicorn et exécuter FastAPI
-CMD ["uvicorn", "fast:app", "--host=0.0.0.0", "--port=8000"]
+CMD ["uvicorn", "fast:app", "--host=0.0.0.0", "--port=80"]
