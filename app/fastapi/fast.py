@@ -59,10 +59,11 @@ def predict(request: TextRequest):
     sentiment = "positif" if prediction == 1 else "négatif"
     return {"sentiment": sentiment}
 
- Route pour enregistrer le feedback de l'utilisateur
+# Route pour enregistrer le feedback de l'utilisateur
 @app.post("/feedback")
 def feedback(feedback_request: FeedbackRequest):
-    # Enregistrer ou traiter le feedback ici
-    # Par exemple, l'enregistrer dans une base de données, ou l'utiliser pour améliorer le modèle
+    # Log du feedback ou enregistrement dans un fichier ou base de données
     print(f"Feedback reçu : {feedback_request.text}, prédiction : {feedback_request.prediction}, feedback : {feedback_request.feedback}")
+    # Optionnel : vous pouvez ici enregistrer les données pour un traitement ultérieur
+    # Par exemple : enregistrer dans un fichier, une base de données, ou envoyer à un service externe
     return {"message": "Feedback reçu avec succès"}

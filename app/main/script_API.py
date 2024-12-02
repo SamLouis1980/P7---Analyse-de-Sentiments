@@ -4,6 +4,7 @@ import requests
 
 # URL de l'API FastAPI
 api_url = "http://backend:8000/predict"
+feedback_url = "http://backend:8000/feedback"
 
 # Application Streamlit
 st.title("Analyse de Sentiment des Tweets")
@@ -36,7 +37,7 @@ if st.button("Analyser"):
         st.write("Veuillez entrer un tweet pour l'analyser.")
 
 # Ajouter un feedback utilisateur
-if st.session_state['prediction'] is not None:
+if st.session_state.get('prediction') is not None:
     feedback = st.selectbox('La prédiction était-elle correcte ?', ('Sélectionnez une option', 'Oui', 'Non'))
     
     # Si l'utilisateur fournit un feedback "Non", envoyer une requête à l'API de feedback
@@ -47,8 +48,6 @@ if st.session_state['prediction'] is not None:
                 'prediction': st.session_state['prediction'],
                 'feedback': feedback
             }
-            # Remplacer cette URL par celle de l'API de feedback
-            feedback_url = "http://backend:8000/feedback"  
             feedback_response = requests.post(feedback_url, json=feedback_data)
             
             if feedback_response.status_code == 200:
