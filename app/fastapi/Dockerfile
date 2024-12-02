@@ -1,5 +1,5 @@
 # Utiliser une image Windows avec Python déjà installé
-FROM mcr.microsoft.com/windows/servercore:ltsc2022
+FROM mcr.microsoft.com/windows/python:3.9.7
 
 # Définir le répertoire de travail dans le conteneur
 WORKDIR /app/fastapi
@@ -21,3 +21,4 @@ EXPOSE 8000
 
 # Commande pour démarrer Uvicorn et exécuter FastAPI
 CMD ["uvicorn", "fast:app", "--host=0.0.0.0", "--port=8000"]
+
