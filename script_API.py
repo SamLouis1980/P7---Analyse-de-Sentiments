@@ -61,3 +61,7 @@ if 'prediction' in st.session_state and st.session_state['prediction'] is not No
 
 else:
     st.write("Aucune prédiction effectuée, veuillez soumettre un tweet pour analyser son sentiment.")
+
+# Adapter l'application Streamlit pour écouter sur le port dynamiquement attribué par Heroku
+port = int(os.environ.get('PORT', 8501))  # Utiliser le port Heroku ou 8501 par défaut
+st.run_server(port=port, address="0.0.0.0")
