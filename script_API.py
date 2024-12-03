@@ -3,8 +3,8 @@ import streamlit as st
 import requests
 
 # URL de l'API FastAPI
-api_url = "http://backend:8000/predict"
-feedback_url = "http://backend:8000/feedback"
+api_url = "https://analyse-sentiment-app.herokuapp.com/predict"
+feedback_url = "https://analyse-sentiment-app.herokuapp.com/feedback"
 
 # Application Streamlit
 st.title("Analyse de Sentiment des Tweets")
