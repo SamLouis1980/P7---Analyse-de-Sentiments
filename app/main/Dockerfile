@@ -1,5 +1,5 @@
 # Utiliser une image Windows avec Python 3.9
-mcr.microsoft.com/windows-cssc/python:3.9-servercore-ltsc2022
+FROM mcr.microsoft.com/windows-cssc/python:3.9-servercore-ltsc2022
 
 # Définir le répertoire de travail dans le conteneur (répertoire racine du projet)
 WORKDIR /app
