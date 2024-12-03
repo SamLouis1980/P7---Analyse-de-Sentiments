@@ -1,13 +1,12 @@
-import os
 import streamlit as st
 import requests
+import os
 
 # URL de l'API FastAPI
 api_url = "https://analyse-sentiment-app.herokuapp.com/predict"
 feedback_url = "https://analyse-sentiment-app.herokuapp.com/feedback"
 
 # Application Streamlit
-port = int(os.environ.get('PORT', 8501))
 st.title("Analyse de Sentiment des Tweets")
 
 # Zone de texte pour l'entrée de l'utilisateur
