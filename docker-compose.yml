@@ -21,6 +21,7 @@ services:
       - "8501:8501"  # Mappe le port 8501 du conteneur au port 8501 de la machine
     depends_on:
       - backend  # S'assurer que backend soit prêt avant de démarrer le frontend
+    command: ["sh", "-c", "while ! curl -s http://backend:8000/; do sleep 1; done; streamlit run /app/script_API.py --server.address 0.0.0.0 --server.port 8501"]
     networks:
       - app_network
 
