@@ -17,8 +17,8 @@ RUN pip install --no-cache-dir -r /app/requirements.txt
 # Copier le script Streamlit dans le conteneur
 COPY script_API.py /app/script_API.py
 
-# Exposer le port 8501 pour Streamlit
+# Exposer le port 8501 pour Streamlit (utilisé en local, Heroku l'utilisera dynamiquement)
 EXPOSE 8501
 
-# Commande pour démarrer Streamlit
+# Commande pour démarrer Streamlit avec le port dynamique sur Heroku
 CMD ["streamlit", "run", "/app/script_API.py", "--server.address", "0.0.0.0", "--server.port", "8501"]
