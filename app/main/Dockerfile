@@ -9,7 +9,7 @@ RUN python -m ensurepip --upgrade
 RUN python -m pip install --upgrade pip
 
 # Copier le fichier requirements.txt pour installer les dépendances
-COPY app/main/requirements.txt /app/requirements.txt
+COPY requirements.txt /app/requirements.txt
 
 # Installer les dépendances Python
 RUN pip install --no-cache-dir -r /app/requirements.txt
