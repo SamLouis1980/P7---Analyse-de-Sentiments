@@ -18,12 +18,12 @@ services:
       context: .
       dockerfile: app/main/Dockerfile
     volumes:
-      - ./app/main:/app
+      - ./app/main:/app/main
     ports:
       - "8501:8501"
     depends_on:
       - backend
-    command: ["streamlit", "run", "/app/script_API.py", "--server.address", "0.0.0.0", "--server.port", "8501"]
+    command: ["streamlit", "run", "/app/main/script_API.py", "--server.address", "0.0.0.0", "--server.port", "8501"]
     networks:
       - app_network
 
