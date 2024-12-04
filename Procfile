@@ -1,2 +1,2 @@
-web: streamlit run /app/script_API.py --server.address 0.0.0.0 --server.port 8501
+web: streamlit run /app/main/script_API.py --server.address 0.0.0.0 --server.port 8501
 
