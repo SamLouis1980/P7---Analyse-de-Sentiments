@@ -2,7 +2,7 @@
 FROM mcr.microsoft.com/windows-cssc/python:3.9-servercore-ltsc2022
 
 # Définir le répertoire de travail dans le conteneur
-WORKDIR /app/fastapi
+WORKDIR C:/app/fastapi
 
 # Copier le fichier requirements.txt pour installer les dépendances
 COPY app/fastapi/requirements.txt /app/fastapi/requirements.txt
