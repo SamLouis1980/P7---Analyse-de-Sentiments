@@ -1,8 +1,8 @@
 # Utiliser une image Windows avec Python 3.9
-FROM mcr.microsoft.com/windows-cssc/python:3.9-servercore-ltsc2022
+FROM python:3.9-slim
 
 # Définir le répertoire de travail dans le conteneur (répertoire racine du projet)
-WORKDIR /app/main
+WORKDIR /app
 
 # Assurer que pip est installé
 RUN python -m ensurepip --upgrade
