@@ -18,7 +18,7 @@ services:
       context: .
       dockerfile: app/main/Dockerfile
     volumes:
-      - ./app/main:/app/main
+      - ./app/main:/app
     ports:
       - "8501:8501"
     depends_on:
