@@ -9,10 +9,10 @@ RUN python -m ensurepip --upgrade
 RUN python -m pip install --upgrade pip
 
 # Copier le fichier requirements.txt pour installer les dépendances
-COPY /app/main/requirements.txt /app/main/requirements.txt
+COPY ./main/requirements.txt /app/main/requirements.txt
 
 # Installer les dépendances Python
-RUN pip install --no-cache-dir -r /app/main/requirements.txt
+RUN python -m pip install --no-cache-dir -r /app/main/requirements.txt
 
 # Copier le script Streamlit dans le conteneur
 COPY /app/main/script_API.py /app/main/script_API.py
