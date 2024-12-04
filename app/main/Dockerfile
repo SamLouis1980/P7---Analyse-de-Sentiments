@@ -2,7 +2,7 @@
 FROM mcr.microsoft.com/windows-cssc/python:3.9-servercore-ltsc2022
 
 # Définir le répertoire de travail dans le conteneur (répertoire racine du projet)
-WORKDIR /app
+WORKDIR /app/main
 
 # Assurer que pip est installé
 RUN python -m ensurepip --upgrade
