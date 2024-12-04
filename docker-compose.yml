@@ -4,24 +4,24 @@ services:
   backend:
     build:
       context: .
-      dockerfile: app/fastapi/Dockerfile  # Chemin vers le Dockerfile pour FastAPI
+      dockerfile: app/fastapi/Dockerfile
     volumes:
       - ./app/fastapi:/app/fastapi
       - ./data:/app/fastapi/data
     ports:
-      - "8000:8000"  # Mappe le port 8000 du conteneur au port 8000 de la machine
+      - "8000:8000"
     networks:
       - app_network
 
   frontend:
     build:
       context: .
-      dockerfile: app/main/Dockerfile  # Chemin vers le Dockerfile pour Streamlit
+      dockerfile: app/main/Dockerfile
     ports:
-      - "8501:8501"  # Mappe le port 8501 du conteneur au port 8501 de la machine
+      - "8501:8501"
     depends_on:
-      - backend  # S'assurer que backend soit prêt avant de démarrer le frontend
-    command: ["sh", "-c", "while ! curl -s http://backend:8000/; do sleep 1; done; streamlit run /app/script_API.py --server.address 0.0.0.0 --server.port 8501"]
+      - backend
+    command: ["sh", "-c", "until nc -z backend 8000; do sleep 1; done; streamlit run /app/script_API.py --server.address 0.0.0.0 --server.port 8501"]
     networks:
       - app_network
 
