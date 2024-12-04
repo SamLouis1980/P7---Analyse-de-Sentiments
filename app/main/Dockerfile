@@ -21,4 +21,4 @@ COPY /app/main/script_API.py /app/main/script_API.py
 ENV PORT=8501
 
 # Lancer Streamlit
-CMD ["streamlit", "run", "/app/main/script_API.py", "--server.address", "0.0.0.0", "--server.port", "8501"]
+CMD ["streamlit", "run", "script_API.py", "--server.address", "0.0.0.0", "--server.port", "8501"]

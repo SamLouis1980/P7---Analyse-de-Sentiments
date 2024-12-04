@@ -8,7 +8,7 @@ WORKDIR app/fastapi
 COPY app/fastapi/requirements.txt /app/fastapi/requirements.txt
 
 # Installer les dépendances Python
-RUN python -m pip install --no-cache-dir -r /app/fastapi/requirements.txt
+RUN pip install --no-cache-dir -r /app/fastapi/requirements.txt
 
 # Copier le script FastAPI dans le conteneur
 COPY app/fastapi/fast.py /app/fastapi/fast.py

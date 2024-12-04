@@ -3,8 +3,8 @@ import requests
 import os
 
 # URL de l'API FastAPI
-api_url = "https://localhost:8000/predict"
-feedback_url = "https://localhost:8000/feedback"
+api_url = "http://backend:8000/predict"
+feedback_url = "http://backend:8000/feedback"
 
 # Application Streamlit
 st.title("Analyse de Sentiment des Tweets")
