@@ -15,7 +15,7 @@ COPY requirements.txt /app/requirements.txt
 RUN pip install --no-cache-dir -r /app/requirements.txt
 
 # Copier le script Streamlit dans le conteneur
-COPY script_API.py /app/script_API.py
+COPY /app/main/script_API.py /app/script_API.py
 
 # Définir un port par défaut si PORT n'est pas défini
 ENV PORT=8501
