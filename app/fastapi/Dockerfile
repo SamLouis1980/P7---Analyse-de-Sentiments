@@ -1,8 +1,8 @@
 # Utiliser une image Windows avec Python 3.9 déjà installé
-FROM mcr.microsoft.com/windows-cssc/python:3.9-servercore-ltsc2022
+FROM python:3.9-slim
 
 # Définir le répertoire de travail dans le conteneur
-WORKDIR C:/app/fastapi
+WORKDIR app/fastapi
 
 # Copier le fichier requirements.txt pour installer les dépendances
 COPY app/fastapi/requirements.txt /app/fastapi/requirements.txt
