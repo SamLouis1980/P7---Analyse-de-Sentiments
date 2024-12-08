@@ -8,7 +8,12 @@ import nltk
 import contractions
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.linear_model import LogisticRegression
-import os
+import sys
+from datetime import datetime
+from applicationinsights import TelemetryClient  # Azure Application Insights
+
+# Initialiser le client Application Insights avec ta clé d'instrumentation
+tc = TelemetryClient('77d3cc30-ccb2-48fb-bb52-a7dbaa2eb669')
 
 # Charger les modèles et le vectoriseur depuis le répertoire du projet
 model_path = os.path.join(os.getcwd(), 'data', 'log_reg_model.pkl')
@@ -68,21 +73,59 @@ def save_feedback_to_csv(feedback_request):
 
 @app.get("/")
 def read_root():
+    # Suivi d'une requête à la racine
+    tc.track_request('Root Endpoint', '/', datetime.now(), 200)
+    tc.flush()
     return {"message": "Bienvenue sur l'API de prédiction de sentiment"}
 
 # Route pour effectuer la prédiction
 @app.post("/predict")
 def predict(request: TextRequest):
-    cleaned_text = nettoyer_texte(request.text)
-    text_vector = vectorizer.transform([cleaned_text])
-    prediction = log_reg_model.predict(text_vector)
-    sentiment = "positif" if prediction == 1 else "négatif"
-    return {"sentiment": sentiment}
+    try:
+        # Suivi de la requête
+        tc.track_request('Predict Endpoint', '/predict', datetime.now(), 200)
+        
+        # Nettoyage du texte et prédiction
+        cleaned_text = nettoyer_texte(request.text)
+        text_vector = vectorizer.transform([cleaned_text])
+        prediction = log_reg_model.predict(text_vector)
+        sentiment = "positif" if prediction == 1 else "négatif"
+
+        # Suivi de l'événement prédiction
+        tc.track_event('Prediction Event', {'text': request.text, 'sentiment': sentiment})
+        tc.flush()
+
+        return {"sentiment": sentiment}
+
+    except Exception as e:
+        # Suivi de l'exception
+        tc.track_exception(*sys.exc_info())
+        tc.flush()
+        raise e
 
 # Route pour enregistrer le feedback de l'utilisateur
 @app.post("/feedback")
 def feedback(feedback_request: FeedbackRequest):
-    # Enregistrer ou traiter le feedback ici
-    save_feedback_to_csv(feedback_request)  # Sauvegarde le feedback dans le CSV
-    print(f"Feedback reçu : {feedback_request.text}, prédiction : {feedback_request.prediction}, feedback : {feedback_request.feedback}")
-    return {"message": "Feedback reçu avec succès"}
+    try:
+        # Suivi de la requête
+        tc.track_request('Feedback Endpoint', '/feedback', datetime.now(), 200)
+        
+        # Sauvegarde du feedback dans le CSV
+        save_feedback_to_csv(feedback_request)
+
+        # Suivi de l'événement feedback
+        tc.track_event('Feedback Received', {
+            'text': feedback_request.text,
+            'prediction': feedback_request.prediction,
+            'feedback': feedback_request.feedback
+        })
+        tc.flush()
+
+        print(f"Feedback reçu : {feedback_request.text}, prédiction : {feedback_request.prediction}, feedback : {feedback_request.feedback}")
+        return {"message": "Feedback reçu avec succès"}
+
+    except Exception as e:
+        # Suivi de l'exception
+        tc.track_exception(*sys.exc_info())
+        tc.flush()
+        raise e
