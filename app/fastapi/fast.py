@@ -74,7 +74,7 @@ def save_feedback_to_csv(feedback_request):
 @app.get("/")
 def read_root():
     # Suivi d'une requête à la racine
-    tc.track_request('Root Endpoint', '/', datetime.now(), 200)
+    tc.track_request('Root Endpoint', '/', datetime.now().isoformat(), 200)
     tc.flush()
     return {"message": "Bienvenue sur l'API de prédiction de sentiment"}
 
@@ -83,7 +83,7 @@ def read_root():
 def predict(request: TextRequest):
     try:
         # Suivi de la requête
-        tc.track_request('Predict Endpoint', '/predict', datetime.now(), 200)
+        tc.track_request('Predict Endpoint', '/predict', datetime.now().isoformat(), 200)
         
         # Nettoyage du texte et prédiction
         cleaned_text = nettoyer_texte(request.text)
@@ -108,7 +108,7 @@ def predict(request: TextRequest):
 def feedback(feedback_request: FeedbackRequest):
     try:
         # Suivi de la requête
-        tc.track_request('Feedback Endpoint', '/feedback', datetime.now(), 200)
+        tc.track_request('Feedback Endpoint', '/feedback', datetime.now().isoformat(), 200)
         
         # Sauvegarde du feedback dans le CSV
         save_feedback_to_csv(feedback_request)
