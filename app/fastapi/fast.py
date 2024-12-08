@@ -10,7 +10,7 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.linear_model import LogisticRegression
 import sys
 from datetime import datetime
-from applicationinsights import TelemetryClient  # Azure Application Insights
+from applicationinsights import TelemetryClient
 
 # Initialiser le client Application Insights avec ta clé d'instrumentation
 tc = TelemetryClient('77d3cc30-ccb2-48fb-bb52-a7dbaa2eb669')
