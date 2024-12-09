@@ -125,12 +125,14 @@ def feedback(feedback_request: FeedbackRequest):
                 'prediction': feedback_request.prediction,
                 'feedback': feedback_request.feedback
             })
+            tc.track_trace(f"Incorrect Prediction: {feedback_request.text} - {feedback_request.prediction}")
         else:
             tc.track_event('Correct Prediction', {
                 'text': feedback_request.text,
                 'prediction': feedback_request.prediction,
                 'feedback': feedback_request.feedback
             })
+            tc.track_trace(f"Correct Prediction: {feedback_request.text} - {feedback_request.prediction}")
 
         tc.flush()
 
