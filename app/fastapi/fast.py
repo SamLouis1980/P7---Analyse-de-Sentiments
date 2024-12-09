@@ -91,13 +91,9 @@ def predict(request: TextRequest):
         prediction = log_reg_model.predict(text_vector)
         sentiment = "positif" if prediction == 1 else "négatif"
 
-        # Simuler une prédiction incorrecte (pour test uniquement)
-        is_incorrect = False  # Changez cela manuellement pour tester
-        if is_incorrect:
-            tc.track_event('Incorrect Prediction', {'text': request.text, 'sentiment': sentiment})
-        else:
-            tc.track_event('Correct Prediction', {'text': request.text, 'sentiment': sentiment})
-
+        # Enregistrer la trace pour une prédiction correcte (par défaut)
+        tc.track_event('Correct Prediction', {'text': request.text, 'sentiment': sentiment})
+        tc.track_trace(f"Correct Prediction: {request.text} - {sentiment}")
         tc.flush()
 
         return {"sentiment": sentiment}
@@ -138,7 +134,6 @@ def feedback(feedback_request: FeedbackRequest):
 
         print(f"Feedback reçu : {feedback_request.text}, prédiction : {feedback_request.prediction}, feedback : {feedback_request.feedback}")
         return {"message": "Feedback reçu avec succès"}
-
 
     except Exception as e:
         # Suivi de l'exception
