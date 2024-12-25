@@ -67,8 +67,11 @@ Voici la structure du projet et une description des différents fichiers et rép
 
 ### Option 2 : Exécution avec Docker
 1. docker-compose up --build
+   
 2. Accéder à l'API et l'interface :
+
    API FastAPI : http://localhost:8000
+
    Interface Streamlit : http://localhost:8501
 
 ### Dépendances
@@ -89,9 +92,13 @@ Toutes les dépendances peuvent être installées à partir des fichiers require
 
 ### Tests Unitaires
 Les tests unitaires sont définis dans le répertoire tests/ :
+
 API FastAPI : test_fast.py
+
 Interface Streamlit : test_script_API.py
+
 Pour exécuter les tests et générer les résultats avec Allure :
+
 pytest --alluredir=allure-results
 
 ### Contact
