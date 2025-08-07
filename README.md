@@ -1,17 +1,43 @@
-# Projet P7 - Analyse de Sentiments
+#  Analyse de sentiments sur Twitter – Air Paradis
 
-## Description
-Ce projet vise à développer une solution d'analyse de sentiments basée sur des tweets. 
-Les principales étapes incluent :
-- Développement d'une API pour la prédiction de sentiments.
-- Mise en place d'une interface Streamlit pour tester l'API et collecter les retours utilisateurs.
-- Conteneurisation et déploiement avec Docker et Heroku.
-- Suivi des performances et gestion des feedbacks.
+## Contexte
 
----
+Dans le cadre d'une mission pour **Air Paradis**, compagnie aérienne active sur les réseaux sociaux, le cabinet **MIC (Marketing Intelligence Consulting)** a été chargé de développer un prototype d’IA permettant de **prédire le sentiment associé à un tweet**.  
+Ce projet vise à anticiper les bad buzz potentiels, en s’appuyant sur des données Open Source, et à présenter une **démarche complète intégrant les principes du MLOps**.
+
+Le livrable principal est une **API déployée sur le Cloud** qui reçoit un tweet et renvoie un score de sentiment, intégrée à une **interface de test locale**.
+
+## Objectif
+
+- Développer trois approches de modélisation :
+  - Un modèle classique simple (Logistic Regression, Naive Bayes…)
+  - Un modèle sur mesure avancé (réseaux de neurones profonds)
+  - Une approche basée sur BERT pour comparer les performances
+- Intégrer une gestion des expérimentations via **MLFlow**
+- Déployer le modèle avancé sous forme d’**API dans le Cloud** (Azure WebApp, Heroku, etc.)
+- Créer une **interface locale** pour interagir avec l’API (Streamlit ou notebook)
+- Implémenter une démarche **MLOps complète** avec suivi de la performance en production (traces et alertes via **Azure Application Insight**)
+- Produire un **article de blog** résumant la démarche et les enseignements
+
+## Technologies utilisées
+
+- `pandas`, `numpy`, `matplotlib`, `seaborn`, `re`, `contractions`, `nltk`
+- `scikit-learn`, `xgboost`, `lightgbm`, `tensorflow`, `keras`, `torch`
+- `transformers`, `BERT`, `Word2Vec`, `FastText`, `USE`
+- `MLFlow`, `pyngrok`, `Streamlit`, `Azure Application Insight`
+- `Flask` ou `FastAPI` (pour l’API de prédiction)
+- `Git`, `GitHub`, `subprocess`, `API REST`, `tests unitaires`
 
 ## Organisation des Fichiers
 Voici la structure du projet et une description des différents fichiers et répertoires :
+
+### Livrables
+- dossier_code/                          # Scripts de préparation, traitement et modélisation
+- API.py                                 # API de prédiction déployée dans le Cloud
+- interface_test_API.py                  # Interface locale (Streamlit / notebook) pour tester l'API
+- notebook_modelisation.ipynb            # Notebook de modélisation avec tracking MLFlow
+- blog.pdf                               # Article de blog (~2000 mots) sur la démarche
+- presentation.pptx                      # Présentation complète de la mission
 
 ### Racine du Projet
 - **`Procfile`** : Fichier de configuration pour déploiement Heroku.
@@ -74,22 +100,6 @@ Voici la structure du projet et une description des différents fichiers et rép
 
    Interface Streamlit : http://localhost:8501
 
-### Dépendances
-Les principales bibliothèques utilisées dans ce projet incluent :
-
-numpy
-pandas
-matplotlib
-scikit-learn
-tensorflow
-transformers
-mlflow
-fastapi
-streamlit
-pytest
-
-Toutes les dépendances peuvent être installées à partir des fichiers requirements.txt correspondants.
-
 ### Tests Unitaires
 Les tests unitaires sont définis dans le répertoire tests/ :
 
@@ -101,5 +111,3 @@ Pour exécuter les tests et générer les résultats avec Allure :
 
 pytest --alluredir=allure-results
 
-### Contact
-Pour toute question ou assistance, veuillez me contacter à : [samylouis.engineer@gmail.com]
